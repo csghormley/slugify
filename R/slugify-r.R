@@ -9,7 +9,10 @@
 slugify <- function(x, repl = "-", lower = TRUE) {
 
   x <- stri_replace_all_fixed(x, names(slugify_charmap), slugify_charmap, vectorize_all = FALSE)
+
+  # remove all punctuation except hyphens
   x <- stri_replace_all_regex(x, "[^\\P{P}-]", "")
+
   x <- stri_trim_both(x)
   x <- stri_replace_all_regex(x, "[[:space:]]+", repl)
 

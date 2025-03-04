@@ -26,22 +26,12 @@ Tools are provided to turn phrases into slugs.
 
 The following functions are implemented:
 
-  - `slugify_native`: Native R slugify (with the help of stringi)
-
   - `slugify`: Slugify a string
 
 ## Installation
 
 ``` r
 install.packages("slugify", repos = c("https://cinc.rud.is", "https://cloud.r-project.org/"))
-# or
-remotes::install_git("https://git.rud.is/hrbrmstr/slugify.git")
-# or
-remotes::install_git("https://git.sr.ht/~hrbrmstr/slugify")
-# or
-remotes::install_gitlab("hrbrmstr/slugify")
-# or
-remotes::install_bitbucket("hrbrmstr/slugify")
 # or
 remotes::install_github("hrbrmstr/slugify")
 ```
@@ -56,7 +46,7 @@ library(slugify)
 
 # current version
 packageVersion("slugify")
-## [1] '0.2.0'
+## [1] '0.2.1'
 ```
 
 ``` r
@@ -65,28 +55,15 @@ slugify("New Package — {cdccovidview} — To Work with the U.S. CDC’s New CO
 
 slugify("New Package — {cdccovidview} — To Work with the U.S. CDC’s New COVID-19 Trackers: COVIDView and COVID-NET", replacement = "@")
 ## [1] "new@package@cdccovidview@to@work@with@the@us@cdcs@new@covid19@trackers@covidview@and@covidnet"
-
-slugify("R is great!", remove = "/[Rr]/g")
-## [1] "is-geat"
-```
-
-``` r
-slugify_native("New Package — {cdccovidview} — To Work with the U.S. CDC’s New COVID-19 Trackers: COVIDView and COVID-NET")
-## [1] "new-package-cdccovidview-to-work-with-the-us-cdcs-new-covid-19-trackers-covidview-and-covid-net"
-
-slugify_native("New Package — {cdccovidview} — To Work with the U.S. CDC’s New COVID-19 Trackers: COVIDView and COVID-NET", repl = "@")
-## [1] "new@package@cdccovidview@to@work@with@the@us@cdcs@new@covid-19@trackers@covidview@and@covid-net"
 ```
 
 ``` r
 microbenchmark::microbenchmark(
-  slugify_native("New Package — {cdccovidview} — To Work with the U.S. CDC’s New COVID-19 Trackers: COVIDView and COVID-NET"),
   slugify("New Package — {cdccovidview} — To Work with the U.S. CDC’s New COVID-19 Trackers: COVIDView and COVID-NET"),
   control = list(warmup = 10)
 )
 ## Unit: microseconds
 ##                                                                                                                         expr
-##  slugify_native("New Package — {cdccovidview} — To Work with the U.S. CDC’s New COVID-19 Trackers: COVIDView and COVID-NET")
 ##         slugify("New Package — {cdccovidview} — To Work with the U.S. CDC’s New COVID-19 Trackers: COVIDView and COVID-NET")
 ##      min       lq     mean   median       uq      max neval
 ##  294.659 310.4540 376.8535 326.3330 375.5105 1446.752   100
